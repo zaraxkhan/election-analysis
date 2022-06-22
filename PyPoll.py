@@ -42,44 +42,63 @@ with open(file_to_load) as election_data:
 
         #Add a vote to candidates count
         candidate_votes[candidate_name]+=1
-        
-#the percentage of votes for each candidate by looping through the counts
-#through candidate list
-for candidate_name in candidate_votes:
-    #retrieve vote count per candidate
-    votes=candidate_votes[candidate_name]
-    # calculate the percentage of votes
-    vote_percentage=float(votes)/float(total_votes)*100
     
-    #print out each candidates stats
-    print(f'{candidate_name}: {vote_percentage:.1f}% ({votes:,})')
-   
-    #Determine if votes are greater than winning count
-    if (votes>winning_count) and (vote_percentage>winning_percentage):
-        #if true set
-        winning_count=votes
-        winning_percentage=vote_percentage
-        winning_candidate=candidate_name
-#print winning candidate stats
-winning_candidate_summary=(f'------------------------------\n'
-    f'Winner: {winning_candidate}\n'
-    f'Winning Vote Count: {winning_count:,}\n'
-    f'Winning Percentage: {winning_percentage:.1f}%\n'
-    f'------------------------------\n')
-print(winning_candidate_summary)
+#save results to text file
+with open(file_to_save,"w") as txt_file:
+    election_results=(
+        f'Election Results\n'
+        f'-------------------------\n'
+        f'Total Votes:{total_votes:,}\n'
+        f'-------------------------\n')
+    print(election_results, end="")
 
-#print candidate name with their percentage of votes
-#print(f'{candidate_name} received {vote_percentage:.2f}% of the votes.')
+    #save finaly vote count to text file
+    txt_file.write(election_results)
 
-#print candidate vote dictionary
-#print(candidate_votes)
-# Print the candidate list
-#print(candidate_options)
-#3. Print the total votes
-#print(total_votes)
-      
-#with open(file_to_save,"w") as txt_file:
-    #txt_file.write("Counties in the Election\n-------------------------------\nArapahoe\nDenver\nJefferson")
+            
+    #the percentage of votes for each candidate by looping through the counts
+    #through candidate list
+    for candidate_name in candidate_votes:
+        #retrieve vote count per candidate
+        votes=candidate_votes[candidate_name]
+        # calculate the percentage of votes
+        vote_percentage=float(votes)/float(total_votes)*100
+                
+        #print out each candidates stats
+        candidate_results=(f'{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n')
+        print(candidate_results)
 
-# Close the file
-    election_data.close()
+        #save file
+        txt_file.write(candidate_results)
+            
+        #Determine if votes are greater than winning count
+        if (votes>winning_count) and (vote_percentage>winning_percentage):
+            #if true set
+            winning_count=votes
+            winning_percentage=vote_percentage
+            winning_candidate=candidate_name
+
+    #print winning candidate stats
+    winning_candidate_summary=(f'------------------------------\n'
+        f'Winner: {winning_candidate}\n'
+        f'Winning Vote Count: {winning_count:,}\n'
+        f'Winning Percentage: {winning_percentage:.1f}%\n'
+        f'------------------------------\n')
+    print(winning_candidate_summary)
+
+    #save file to txt file
+    txt_file.write(winning_candidate_summary)
+
+        #print candidate name with their percentage of votes
+        #print(f'{candidate_name} received {vote_percentage:.2f}% of the votes.')
+        #print candidate vote dictionary
+        #print(candidate_votes)
+        #Print the candidate list
+        #print(candidate_options)
+        #3. Print the total votes
+        #print(total_votes)
+        #with open(file_to_save,"w") as txt_file:
+            #txt_file.write("Counties in the Election\n-------------------------------\nArapahoe\nDenver\nJefferson")
+
+        # Close the file
+            #election_data.close()
