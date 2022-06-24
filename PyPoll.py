@@ -88,17 +88,6 @@ with open(file_to_save,"w") as txt_file:
 
     #save file to txt file
     txt_file.write(winning_candidate_summary)
-
-        #print candidate name with their percentage of votes
-        #print(f'{candidate_name} received {vote_percentage:.2f}% of the votes.')
-        #print candidate vote dictionary
-        #print(candidate_votes)
-        #Print the candidate list
-        #print(candidate_options)
-        #3. Print the total votes
-        #print(total_votes)
-        #with open(file_to_save,"w") as txt_file:
-            #txt_file.write("Counties in the Election\n-------------------------------\nArapahoe\nDenver\nJefferson")
-
-        # Close the file
-            #election_data.close()
+    
+    # Close the file
+    election_data.close()
